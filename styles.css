@@ -60,6 +60,11 @@
     cursor: pointer;
   }
 
+  #address {
+      color: white;
+      margin-top: 2rem;
+  }
+
   .copyright {
       color: white;
       margin-top: 12rem;

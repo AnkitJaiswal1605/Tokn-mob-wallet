@@ -20,9 +20,12 @@
           <div class="background"></div>
           <div>
             <h1 class="connect-wallet">Connect Wallet</h1>
+            
             <img src="metamask.png" alt="Metamask logo" class="metamask-img" />
-            <button type="button" name="button" class="btn-primary metamask-btn">Mobile Metamask</button>
+            <button type="button" name="button" class="btn-primary metamask-btn">Connect Mobile Metamask</button>
           </div>
+          <div id="address"></div>
+
         
         <p class="copyright">Copyright @ 2022 Tokn, Inc.</p>  
          
@@ -39,7 +42,7 @@
 
                     var accounts = await web3.eth.getAccounts();
                     account = accounts[0];
-                    document.getElementById("wallet-address").textContent = account.substring(0,5) + "..." + account.substring(37,42);
+                    document.getElementById("address").textContent = account.substring(0,5) + "..." + account.substring(37,42);
 					// document.getElementById("connect-wallet").textContent = "DISCONNECT WALLET";
 					// document.getElementById("connect-wallet").classList.add("connected");
                     document.getElementById('signed-out').style.display = 'none';

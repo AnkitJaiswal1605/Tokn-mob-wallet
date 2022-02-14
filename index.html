@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokn Music</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@700&family=Inter&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div class="App">
+          <div class="background"></div>
+          <div>
+            <h1 class="connect-wallet">Connect Wallet</h1>
+            <img src="metamask.png" alt="Metamask logo" class="metamask-img" />
+            <button type="button" name="button" class="btn-primary metamask-btn">Mobile Metamask</button>
+          </div>
+        
+        <p class="copyright">Copyright @ 2022 Tokn, Inc.</p>  
+         
+      </div>
+
+        <script type="text/javascript">
+            var account = null;
+            var contract = null;
+
+            (async () => {
+                if(window.ethereum) {
+                    await window.ethereum.send('eth_requestAccounts');
+                    window.web3 = new Web3(window.ethereum);
+
+                    var accounts = await web3.eth.getAccounts();
+                    account = accounts[0];
+                    document.getElementById("wallet-address").textContent = account.substring(0,5) + "..." + account.substring(37,42);
+					// document.getElementById("connect-wallet").textContent = "DISCONNECT WALLET";
+					// document.getElementById("connect-wallet").classList.add("connected");
+                    document.getElementById('signed-out').style.display = 'none';
+                    document.getElementById('signed-out-h2').style.display = 'none';
+                    document.getElementById('signed-in').style.display = 'flex';
+                    document.getElementById('signed-in-h2').style.display = 'inline-block';
+					contract = new web3.eth.Contract(ABI, ADDRESS);
+
+                    document.getElementById('nft-balance').textContent = await contract.methods.balanceOf(account).call();
+
+					// var dogeId = await contract.methods.tokenOfOwnerByIndex(account, 3).call();
+                    // var dogeUri = await contract.methods.tokenURI(dogeId).call();
+                    // var response = await axios.get(dogeUri);
+                    // var dogeImage = response.data.image;
+					// dogeImage = dogeImage.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/")
+					// document.getElementById("doge-img").src = dogeImage;
+
+                    document.getElementById('mint').onclick = () => {
+						var mintQty = document.querySelector('.mint-qty').value;
+						var mintPrice = (0.2 * 10 ** 18) * mintQty;
+						console.log(mintPrice);
+                        contract.methods.mint(mintQty).send({ from: account, value: mintPrice });
+                    }
+
+					document.querySelector('.connected').onclick = (() => {
+                        window.location.reload();
+						// document.getElementById("wallet-address").textContent = "";
+						// document.getElementById('nft-balance').textContent = "";
+						// document.getElementById("connect-wallet").textContent = "Connect Wallet";
+						// document.getElementById("connect-wallet").classList.remove("connected");
+						// document.getElementById("connect-wallet").addEventListener(click);
+
+                        
+					});
+                }
+				
+            })();
+
+        </script>
+
+</body>
+</html>

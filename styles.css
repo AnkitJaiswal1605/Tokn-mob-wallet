@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.App {
+    font-family: "roboto", sans-serif;
+    text-align: center;
+    /*  */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  } 
+  
+  .background {
+    display: inline-block;
+    position: fixed;
+    height: 100%; 
+    width: 100%;
+    z-index: -1;
+    background-color: #24A2FD !important;
+    background-image: linear-gradient(to right, #1398FF , #27BFFF);
+    /* background-image: linear-gradient(to right, #333333 , #222222); */
+  }
+
+  
+  
+  
+  .connect-wallet {
+    color: white;
+    font-size: 2.5rem;
+    /*  */
+    margin-bottom: 4rem;
+    /* position: relative;
+    top: 25vh; */
+  }
+  
+  .metamask-img {
+    height: 2.5rem;
+    width: 2.5rem;
+    position: relative;
+    /*  */
+    /* top: 33vh; */
+    left: 3rem;
+    z-index: 1;
+  }
+  
+  .metamask-btn {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-style: none;
+    border-radius: 100px;
+    padding: 1rem 8rem;
+    position: relative;
+    right: 0.8rem;
+    /*  */
+    /* top: 33vh; */
+    cursor: pointer;
+  }
+
+  .copyright {
+      color: white;
+      margin-top: 12rem;
+  }
